@@ -1,0 +1,7 @@
+/home/labuser/Downloads/SourceFiles/DirectC/CMakeFiles/install/strip.dir
+/home/labuser/Downloads/SourceFiles/DirectC/CMakeFiles/install/local.dir
+/home/labuser/Downloads/SourceFiles/DirectC/CMakeFiles/install.dir
+/home/labuser/Downloads/SourceFiles/DirectC/CMakeFiles/list_install_components.dir
+/home/labuser/Downloads/SourceFiles/DirectC/CMakeFiles/rebuild_cache.dir
+/home/labuser/Downloads/SourceFiles/DirectC/CMakeFiles/edit_cache.dir
+/home/labuser/Downloads/SourceFiles/DirectC/CMakeFiles/fw_update.dir
