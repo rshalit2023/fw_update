@@ -31,6 +31,7 @@ tool/CMakeFiles/fw_update.dir/dpDUTspi.c.o
  /home/labuser/fw_update/tool/dpDUTspi.c
  /home/labuser/fw_update/tool/dpDUTspi.h
  /home/labuser/fw_update/tool/dpuser.h
+ hw/spi.h
 tool/CMakeFiles/fw_update.dir/dpalg.c.o
  /home/labuser/fw_update/tool/dpDUTspi.h
  /home/labuser/fw_update/tool/dpalg.c

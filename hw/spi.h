@@ -1,8 +1,12 @@
-#ifndef _SPI_H
-#define _SPI_H
+#ifndef _FWUPDATE_SPI_H
+#define _FWUPDATE_SPI_H
+
+#define SPI_DEV_NAME        "/dev/spidev0.0"
+#define SPIDEV_MODE         (3)
+#define SPIDEV_CLK_RATE     (5000000) /* TODO - this also matches the rate in dts */
+#define SPIDEV_CHANEL       (0) /* TODO probably should be 1 - CS */
 
 
-//sh dummy
 #define DUT_SPI_INSTANCE	(0)
 #define MSS_SPI_SLAVE_0		(0)
 #define MSS_SPI_MODE3		(0)
@@ -11,22 +15,12 @@
 #define DUT_SPI_SLAVE		(0)
 
 
-#define SPI0_MODE       (3)
-#define SPI0_1_CLK_RATE (8000000)
-#define SPI0_CHANEL     (1)
-
-
 #define SPI_CS_0        (0)
 #define SPI_CS_1        (1)
 
 
 void MSS_SPI_set_slave_select( int _DUT_SPI_INSTANCE, int _DUT_SPI_SLAVE );
 void MSS_SPI_clear_slave_select( int _DUT_SPI_INSTANCE, int _DUT_SPI_SLAVE );
-
-
-int SpiRwByte(unsigned char *byte_out, unsigned int len);
-
-
 
 
 void MSS_SPI_init(int inst);

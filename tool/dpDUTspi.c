@@ -5,13 +5,13 @@ MICROSEMI SOC CORP LICENSE AGREEMENT REGARDING THE USE OF THIS SOFTWARE.
 INSTALLING THIS SOFTWARE INDICATES THAT YOU ACCEPT AND UNDERSTAND THIS AGREEMENT 
 AND WILL ABIDE BY IT. 
 
-Note: This license agreement (“License”) only includes the following software: 
+Note: This license agreement (ï¿½Licenseï¿½) only includes the following software: 
 DirectC. DirectC is licensed under the following terms and conditions.
 
-Hereinafter, Microsemi SoC Corp. shall be referred to as “Licensor” or “Author,” 
-whereas the other party to this License shall be referred to as “Licensee.” Each 
-party to this License shall be referred to, singularly, as a “Party,” or, 
-collectively, as the “Parties.”
+Hereinafter, Microsemi SoC Corp. shall be referred to as ï¿½Licensorï¿½ or ï¿½Author,ï¿½ 
+whereas the other party to this License shall be referred to as ï¿½Licensee.ï¿½ Each 
+party to this License shall be referred to, singularly, as a ï¿½Party,ï¿½ or, 
+collectively, as the ï¿½Parties.ï¿½
 
 Permission to use, copy, modify, and/or distribute DirectC for any purpose, with
 or without fee, is hereby granted by Licensor to Licensee, provided that the 
@@ -36,7 +36,7 @@ Assets Control including any other U.S. Government regulation applicable to the
 export, re-export, or disclosure of such controlled technical data (or the 
 products thereof) to Foreign Nationals, whether within or without the U.S., 
 including those employed by, or otherwise associated with, Licensee. Licensee 
-shall obtain Licensor’s written consent prior to submitting any request for 
+shall obtain Licensorï¿½s written consent prior to submitting any request for 
 authority to export any such technical data.
 
 ADR: Any dispute between the Parties arising from or related to this License or 
@@ -124,7 +124,6 @@ void do_SPI_SCAN_in(unsigned char command, unsigned int data_bits, unsigned char
 {
     unsigned char tmp_buf[17] = {0};
     int i;
-    //unsigned int len;
 
     if((((data_bits / 8)+1))>sizeof(tmp_buf))
     {
@@ -138,19 +137,14 @@ void do_SPI_SCAN_in(unsigned char command, unsigned int data_bits, unsigned char
         tmp_buf[i] = input_buffer[i-1];
     }
 
-    //len = ((data_bits == 0)&&(input_buffer == (DPUCHAR*)(DPUCHAR*)DPNULL)) ? 1 : sizeof(tmp_buf);
     MSS_SPI_set_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
-#if 0
-    MSS_SPI_transfer_block( DUT_SPI_INSTANCE, tmp_buf, (data_bits + 8) / 8, DPNULL, 0u);
-#else
+    /* writing command + buffer to flash */
     MSS_SPI_transfer_block( DUT_SPI_INSTANCE, tmp_buf,  (1+ (data_bits/8)) /*len*/, DPNULL, 0u);
-#if 1 //we shift in ...
     for (i=1; (i <= (data_bits/8)) ; i++)
     {
         spi_output_buffer[i-1] = tmp_buf[i];
     }
-#endif
-#endif
+
     MSS_SPI_clear_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
 
     return;
@@ -165,47 +159,27 @@ void do_SPI_SCAN_out(unsigned int command_bits, unsigned char *command, unsigned
         printf("Error %s:%d tx[%d]rx[%d]\n", __func__, __LINE__, (command_bits / 8), (data_bits / 8));
         while(1);
     }
-#if 0
-    if(output_buffer == (DPUCHAR*)(DPUCHAR*)DPNULL)
+
+    for (i=0; (i< (command_bits / 8))  ; i++)
     {
-        MSS_SPI_set_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
-        MSS_SPI_transfer_block( DUT_SPI_INSTANCE, command, 1, (DPUCHAR*)(DPUCHAR*)DPNULL, 0);
-        MSS_SPI_clear_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
+        tmp_buf[i] = command[i];
     }
-    else
+
+
+    MSS_SPI_set_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
+    /* reading one more byte then the actual rx-len */
+    MSS_SPI_transfer_block( DUT_SPI_INSTANCE, (DPUCHAR*)(DPUCHAR*)DPNULL, 0, tmp_buf, (data_bits / 8)+(command_bits / 8));
+    MSS_SPI_clear_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
+
+    for (i=0; (i< (command_bits / 8)) ; i++)
     {
-        tmp_buf[0] = *command;
-        MSS_SPI_set_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
-        MSS_SPI_transfer_block( DUT_SPI_INSTANCE, (DPUCHAR*)(DPUCHAR*)DPNULL, 0, tmp_buf, sizeof(tmp_buf));
-        MSS_SPI_clear_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
-
-        for (i=0; (i< (data_bits / 8)) ; i++)
-        {
-            output_buffer[i] = tmp_buf[i+1];
-        }
+        command[i] = tmp_buf[i];
     }
-#else
-        for (i=0; (i< (command_bits / 8))  ; i++)
-        {
-            tmp_buf[i] = command[i];
-        }
 
-
-        //tmp_buf[0] = *command;
-        MSS_SPI_set_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
-        MSS_SPI_transfer_block( DUT_SPI_INSTANCE, (DPUCHAR*)(DPUCHAR*)DPNULL, 0, tmp_buf, (data_bits / 8)+(command_bits / 8));
-        MSS_SPI_clear_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
-
-        for (i=0; (i< (command_bits / 8)) ; i++)
-        {
-            command[i] = tmp_buf[i];
-        }
-
-        for (i=(command_bits / 8); (i < ((data_bits / 8)+(command_bits / 8))); i++)
-        {
-            output_buffer[i-(command_bits / 8)] = tmp_buf[i];
-        }
-#endif
+    for (i=(command_bits / 8); (i < ((data_bits / 8)+(command_bits / 8))); i++)
+    {
+        output_buffer[i-(command_bits / 8)] = tmp_buf[i];
+    }
 
     return;
 }

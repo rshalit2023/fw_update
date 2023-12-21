@@ -57,7 +57,7 @@ extern DPUCHAR *image_buffer;
 char mybuff[10079858];
 
 
-int PiSPISetupMode (int channel, int speed, int mode);
+int MSS_SPI_setup (int channel, int speed, int mode);
 
 
 int main(int argc, char **argv)
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
 
     dut_spi_flash_init(atoi(argv[2]));
 
-  	rc = PiSPISetupMode(SPI0_CHANEL, SPI0_1_CLK_RATE, SPI0_MODE);
+  	rc = MSS_SPI_setup(SPIDEV_CHANEL, SPIDEV_CLK_RATE, SPIDEV_MODE);
     if(rc == -1)
     {
         printf("SPI setupError\n");

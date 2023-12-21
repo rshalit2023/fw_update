@@ -30,6 +30,7 @@ tool/CMakeFiles/fw_update.dir/__/hw/spi.c.o: hw/spi.h
 tool/CMakeFiles/fw_update.dir/dpDUTspi.c.o: tool/dpDUTspi.c
 tool/CMakeFiles/fw_update.dir/dpDUTspi.c.o: tool/dpDUTspi.h
 tool/CMakeFiles/fw_update.dir/dpDUTspi.c.o: tool/dpuser.h
+tool/CMakeFiles/fw_update.dir/dpDUTspi.c.o: hw/spi.h
 
 tool/CMakeFiles/fw_update.dir/dpalg.c.o: tool/dpDUTspi.h
 tool/CMakeFiles/fw_update.dir/dpalg.c.o: tool/dpalg.c
