@@ -23,7 +23,7 @@ void MSS_SPI_set_slave_select( int _DUT_SPI_INSTANCE, int _DUT_SPI_SLAVE );
 void MSS_SPI_clear_slave_select( int _DUT_SPI_INSTANCE, int _DUT_SPI_SLAVE );
 
 
-void MSS_SPI_init(int inst);
+void MSS_SPI_init(void);
 void MSS_SPI_configure_master_mode(
     int _DUT_SPI_INSTANCE,
     int _MSS_SPI_SLAVE_0,

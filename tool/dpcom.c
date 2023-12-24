@@ -84,7 +84,6 @@ communications whether written or oral.                                     */
 #include "dpcom.h"
 #include "dputil.h"
 
-
 /*
 * Paging System Specific Implementation.  User attention required:
 */

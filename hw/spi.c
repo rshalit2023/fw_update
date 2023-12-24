@@ -23,7 +23,7 @@ static int         spiFds;
      _a > _b ? _a : _b; })
 
 
-void MSS_SPI_init(int inst)
+void MSS_SPI_init(void)
 {
 }
 

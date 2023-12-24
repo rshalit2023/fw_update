@@ -91,12 +91,12 @@ DPUCHAR spi_output_buffer[SPI_BUFFER_BYTE_SIZE];
 /*******************************************************************************
 *
 */
-void dut_spi_flash_init( int spi_cs )
+void dut_spi_flash_init( void )
 {
     /*--------------------------------------------------------------------------
     * Configure MSS_SPI.
     */
-    MSS_SPI_init(spi_cs /*(DUT_SPI_INSTANCE)*/);
+    MSS_SPI_init();
     MSS_SPI_configure_master_mode(
     DUT_SPI_INSTANCE,
     MSS_SPI_SLAVE_0,
