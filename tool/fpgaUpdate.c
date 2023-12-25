@@ -53,7 +53,7 @@ static const char actions_tbl[][64] =
 
 extern DPUCHAR Action_code;
 extern DPUCHAR *image_buffer; 
-char mybuff[10079858]; /* TODO - fix */
+char mybuff[10079858]; /* TODO - fix !!! */
 
 int main(int argc, char **argv)
 {
