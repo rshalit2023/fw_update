@@ -168,6 +168,7 @@ void do_SPI_SCAN_out(unsigned int command_bits, unsigned char *command, unsigned
 
     MSS_SPI_set_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
     /* reading one more byte then the actual rx-len */
+    /* MSS_SPI_transfer_block is using the input buffer for both tx and rx (see transmit implementation) */
     MSS_SPI_transfer_block( DUT_SPI_INSTANCE, (DPUCHAR*)(DPUCHAR*)DPNULL, 0, tmp_buf, (data_bits / 8)+(command_bits / 8));
     MSS_SPI_clear_slave_select( DUT_SPI_INSTANCE, DUT_SPI_SLAVE );
 
