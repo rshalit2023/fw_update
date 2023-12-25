@@ -23,7 +23,7 @@ void MSS_SPI_set_slave_select( int _DUT_SPI_INSTANCE, int _DUT_SPI_SLAVE );
 void MSS_SPI_clear_slave_select( int _DUT_SPI_INSTANCE, int _DUT_SPI_SLAVE );
 
 
-void MSS_SPI_init(int inst);
+void MSS_SPI_init(void);
 void MSS_SPI_configure_master_mode(
     int _DUT_SPI_INSTANCE,
     int _MSS_SPI_SLAVE_0,
@@ -34,6 +34,6 @@ void MSS_SPI_configure_master_mode(
 
 
 void MSS_SPI_transfer_block( int _DUT_SPI_INSTANCE, char *tx_buf, unsigned int tx_buf_len, char *rx_buf, unsigned int rx_buf_len);
-
+int MSS_SPI_setup (int speed, int mode);
 
 #endif //_SPI_H
