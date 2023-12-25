@@ -51,7 +51,6 @@ static const char actions_tbl[][64] =
     "DP_REPROGRAM_INFLIGHT_ACTION_CODE"
 };
 
-/* adding comment */
 extern DPUCHAR Action_code;
 extern DPUCHAR *image_buffer; 
 char mybuff[10079858]; /* TODO - fix */
