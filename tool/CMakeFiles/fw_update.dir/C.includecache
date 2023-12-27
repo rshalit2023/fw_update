@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/labuser/fw_update/hw/gpio.h
+
+/home/labuser/fw_update/hw/spi.c
+stdio.h
+-
+string.h
+-
+sys/ioctl.h
+-
+unistd.h
+-
+linux/spi/spidev.h
+-
+fcntl.h
+-
+gpio.h
+/home/labuser/fw_update/hw/gpio.h
+spi.h
+/home/labuser/fw_update/hw/spi.h
+
+/home/labuser/fw_update/hw/spi.h
+
